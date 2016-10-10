@@ -1,0 +1,18 @@
+{
+    "contents" : "require(shiny)\nlibrary(leaflet)\n\nload(\"preLoadedObjects/Mapa\")\n\nserver <- function(input, output, session) {\n  load(\"preLoadedObjects/Mapa\")\n \n  output$mymap <- renderLeaflet({\n  MapaGeneral\n  })\n}",
+    "created" : 1476139903244.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2916275487",
+    "id" : "10C57E74",
+    "lastKnownWriteTime" : 1476140007,
+    "path" : "~/Desktop/SinDudas/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

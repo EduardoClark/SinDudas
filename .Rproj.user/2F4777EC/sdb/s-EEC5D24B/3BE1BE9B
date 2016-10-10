@@ -1,0 +1,18 @@
+{
+    "contents" : "require(shiny)\nrequire(htmltools)\n\nhtmlTemplate(\"index.html\",\n    maincontent= tabsetPanel(type=\"tabs\",\n                             tabPanel(HTML('<img src=\"/assets/mapaazul.png\" style=\"width:20%;height:20%;color=blue;\">&nbsp;&nbsp;&nbsp;MAPA'), \n                                      leafletOutput(\"mymap\"),\n                             tabPanel(HTML('<a\"><img src=\"/assets/mapaazul.png\" style=\"width:20%;height:20%;color=blue;\">&nbsp;&nbsp;&nbsp;LISTA</a>'), \n                                      verbatimTextOutput(\"mapaprueba))\n        )\n)\n\n\n",
+    "created" : 1476124718509.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3431139609",
+    "id" : "3BE1BE9B",
+    "lastKnownWriteTime" : 1476139252,
+    "path" : "~/Desktop/SinDudas/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

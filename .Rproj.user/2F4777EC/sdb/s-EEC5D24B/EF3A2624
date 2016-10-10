@@ -1,0 +1,18 @@
+{
+    "contents" : "require(shiny)\n\nload(\"preLoadedObjects/Mapa\")\n\nr_colors <- rgb(t(col2rgb(colors()) / 255))\nnames(r_colors) <- colors()\n\nui <- fluidPage(\n  leafletOutput(\"mymap\"),\n  p(),\n  actionButton(\"recalc\", \"New points\")\n)\n\nserver <- function(input, output, session) {\n  \n  points <- eventReactive(input$recalc, {\n    cbind(rnorm(40) * 2 + 13, rnorm(40) + 48)\n  }, ignoreNULL = FALSE)\n  \n  output$mymap <- renderLeaflet({\n    leaflet() %>%\n      addProviderTiles(\"Stamen.TonerLite\",\n                       options = providerTileOptions(noWrap = TRUE)\n      ) %>%\n      addMarkers(data = points())\n  })\n}",
+    "created" : 1476124732322.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1586345110",
+    "id" : "EF3A2624",
+    "lastKnownWriteTime" : 1476139219,
+    "path" : "~/Desktop/SinDudas/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

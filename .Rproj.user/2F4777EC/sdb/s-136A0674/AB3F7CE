@@ -1,0 +1,18 @@
+{
+    "contents" : "\nrequire(gsheet)\nrequire(leaflet)\nrequire(dplyr)\nrequire(ggmap)\n\nSheet <- gsheet2tbl(\"https://docs.google.com/spreadsheets/d/1D4oGSUEC0WVXmVVOBRRQRofZuOYhabBqIENIoBecppg/edit?usp=sharing\")\n\nSheet$address <- gsub(\"\\n\",\"\",paste0(Sheet$Dirección, \", Mexico DF\"))\naddresses = Sheet$address\n\n\n#define a function that will process googles server responses for us.\ngetGeoDetails <- function(address){   \n  #use the gecode function to query google servers\n  geo_reply = geocode(address, output='all', messaging=TRUE, override_limit=TRUE)\n  #now extract the bits that we need from the returned list\n  answer <- data.frame(lat=NA, long=NA, accuracy=NA, formatted_address=NA, address_type=NA, status=NA)\n  answer$status <- geo_reply$status\n  \n  #if we are over the query limit - want to pause for an hour\n  while(geo_reply$status == \"OVER_QUERY_LIMIT\"){\n    print(\"OVER QUERY LIMIT - Pausing for 1 hour at:\") \n    time <- Sys.time()\n    print(as.character(time))\n    Sys.sleep(60*60)\n    geo_reply = geocode(address, output='all', messaging=TRUE, override_limit=TRUE)\n    answer$status <- geo_reply$status\n  }\n  \n  #return Na's if we didn't get a match:\n  if (geo_reply$status != \"OK\"){\n    return(answer)\n  }   \n  #else, extract what we need from the Google server reply into a dataframe:\n  answer$lat <- geo_reply$results[[1]]$geometry$location$lat\n  answer$long <- geo_reply$results[[1]]$geometry$location$lng   \n  if (length(geo_reply$results[[1]]$types) > 0){\n    answer$accuracy <- geo_reply$results[[1]]$types[[1]]\n  }\n  answer$address_type <- paste(geo_reply$results[[1]]$types, collapse=',')\n  answer$formatted_address <- geo_reply$results[[1]]$formatted_address\n  answer <- answer[,1:2]\n  answer$Dirección <- address\n  return(answer)\n}\n\nTMP <- bind_rows(lapply(addresses, getGeoDetails))\nTMP$address <- TMP$Dirección\nTMP$Dirección <- NULL\nTMP <- left_join(Sheet,TMP)\nTMP <- unique(TMP)\n\n#Map\nMapaGeneral <- leaflet(data =TMP) %>% addProviderTiles(\"CartoDB.Positron\") %>% setView(-99.16666, 19.42455, zoom = 12) %>%\n  addMarkers(~long, ~lat, popup = ~as.character(Institución))\nsave(MapaGeneral,file = \"preLoadedObjects/Mapa\")\n",
+    "created" : 1476139380885.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "303557213",
+    "id" : "AB3F7CE",
+    "lastKnownWriteTime" : 1476139889,
+    "path" : "~/Desktop/SinDudas/lint.R",
+    "project_path" : "lint.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
