@@ -50,8 +50,16 @@ TMP$address <- TMP$Dirección
 TMP$Dirección <- NULL
 TMP <- left_join(Sheet,TMP)
 TMP <- unique(TMP)
+TMP$Popup <- paste("<a style=\\'color=#FFCC33\\'><b>",TMP$Institución, "</b></a>
+                     <br><hr style=\\'#f2f3f4\\'>
+                     <a style=\\'color=#f2f3f4\\'>", TMP$Dirección,"</a>",
+                     "<br><a>Afiliación <b>", TMP$Afiliación,"</b></a>",
+                     "<br><img src=\'assets/Gratis.png\' style=\\'width:2.5%;height:2.5%;\\'>",
+                     "<a><b>", TMP$Tipo.de.Prueba,"</b></a>",sep="")
+  
+  #Map
+  MapaGeneral <- leaflet(data =TMP) %>% addProviderTiles("CartoDB.Positron") %>% setView(-99.16666, 19.42455, zoom = 12) %>%
+    addMarkers(~long, ~lat, popup = ~as.character(Popup))
+  save(MapaGeneral,file = "preLoadedObjects/Mapa")
 
-#Map
-MapaGeneral <- leaflet(data =TMP) %>% addProviderTiles("CartoDB.Positron") %>% setView(-99.16666, 19.42455, zoom = 12) %>%
-  addMarkers(~long, ~lat, popup = ~as.character(Institución))
-save(MapaGeneral,file = "preLoadedObjects/Mapa")
+ 

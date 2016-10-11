@@ -160,3 +160,12 @@ li.active > a:nth-child(1) > a":nth-child(1) {
 #tab-8683-2 {
     margin-top: 50px;
 }
+
+
+body > div.main-page > div > div > ul {
+margin-bottom: 20px;
+}
+
+body > div.main-page > div > div > div {
+margin-bottom: 40px;
+}
