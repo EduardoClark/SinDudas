@@ -181,6 +181,89 @@ body > div.jumbotron {
     margin-right: -5px;
 }
 
+body > div.main-page > div > div.container-fluid {
+  margin-top:-60px;
+}
+
+
 .nav-tabs {
-    border-bottom: 0px solid #ddd!important;
+    border-bottom: 0px solid #ddd !important;
+}
+
+table {
+  border-spacing:0px 20px !important;
+  background-color:transparent !important;
+}
+
+.odd {
+  background-color:white !important;
+}
+
+.even {
+  background-color:white !important;
+}
+
+table.dataTable.no-footer {
+    border-bottom: 0px solid #111 !important;
+}
+
+#DataTables_Table_0 > tbody > tr > td > a {
+  color:#696969;
+}
+
+#DataTables_Table_0 > tbody > tr > td > a:hover {
+  color:#696969;
+  text-decoration: none;
+}
+
+.column-left{ float: left; width: 33%; }
+.column-right{ float: right; width: 33%; }
+.column-center{ display: inline-block; width: 33%; }
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-weight:normal
+}
+
+
+@media (min-width: 768px) {
+    body > div.container {
+        max-width: 100%;
+    }
+}
+
+body > div.container > div.Information > div > a {
+  color:#7e7e7e;
+  font-size:12px;
+}
+
+body > div.container > div:nth-child(2) > table > tbody > tr > th > a {
+   color:#7e7e7e;
+  font-size:12px;
+}
+
+body > div.container > div.MsInformation > div > a {
+  color:#7e7e7e;
+  font-size:12px;
+}
+
+body > div.container > div.MsInformation > div > a.enfasis {
+  color:#5407C5;
+  font-size:20px;
+}
+
+body > div.container > div.MsInformation {
+  line-height: 90%;
+}
+
+#mymap {
+  height:600px !important;
 }

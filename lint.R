@@ -63,7 +63,24 @@ TMP$Popup <- paste("<a style=\\'color=#FFCC33\\'><b>",TMP$Institución, "</b></a
 
 Icons <- makeIcon(iconUrl = "https://github.com/EduardoClark/SinDudas/raw/master/www/assets/ImportedLayersCopy%206.png",
                   iconWidth = 20, iconHeight = 30)
-TMP1 <- TMP[,c(1,2,3,4,5,6)]
+TMP1 <- TMP
+TMP2 <- TMP[,c(1,2,13,5,7,9,14)]
+
+TMP1$Costo2 <- gsub(pattern = "Gratuita",replacement = "$0",TMP1$Costo)
+TMP1$Costo2 <- gsub(pattern = "[A-Za-z]",replacement = "",TMP1$Costo2)
+TMP1$Costo2 <- gsub(pattern = "[^0-9]",replacement = "",TMP1$Costo2)
+TMP1$Costo2 <- as.numeric(substr(TMP1$Costo2,1,3))
+TMP2$Consejería <- gsub("D","d",TMP2$Consejería)
+TMP2$Prueba <- paste("<a><b style='color:#5407C5 !important;font-size:20px !important;'>",TMP2$Nombre.Corto,
+                     "</b>",TMP2$DireccionCorta,
+                     "</br></br>Afiliciacion<b> ",TMP2$Afiliación,
+                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>Tipo<b>", TMP2$Tipo.de.Prueba, 
+                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>Consejeria<b>",TMP2$Consejería, 
+                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>Costo<b> ",TMP1$Costo,
+                     "</b></a>")
+TMP2$Prueba2 <- "<a>Más información</a>"
+TMP2$Costo2 <- TMP1$Costo2 
+
 
 #Map
 MapaGeneral <- leaflet(data =TMP) %>% addProviderTiles("CartoDB.Positron") %>% setView(-99.17047, 19.42069, zoom = 14) %>%
@@ -71,6 +88,7 @@ MapaGeneral <- leaflet(data =TMP) %>% addProviderTiles("CartoDB.Positron") %>% s
   save(MapaGeneral,file = "preLoadedObjects/Mapa")
   
   
-  save(TMP1,file = "preLoadedObjects/TMP")
+  save(TMP1,TMP2,file = "preLoadedObjects/TMP")
   
  
+remove(list=ls())
