@@ -22,7 +22,7 @@ htmlTemplate("index.html",
                         textOutput("prueba2")))
              ),
              
-             content2 = fluidPage(conditionalPanel(condition="input.tabs=='tabb2'",
+             content2 = fluidPage(conditionalPanel(condition="input.tabs!='tabb2'",
              DT::dataTableOutput("prueba") 
              )
              
